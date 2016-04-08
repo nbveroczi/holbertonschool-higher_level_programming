@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import urllib2
 
 request_headers = {
@@ -6,6 +8,7 @@ request_headers = {
 } 
 
 def main():
+
   # open a connection to a URL using urllib2
   webUrl = urllib2.urlopen("https://api.github.com/search/repositories?q=language:python&sort=stars&order=desc")  
 
