@@ -17,6 +17,8 @@ class Person():
     GENRES = ["Female", "Male"]
     
     """ Constructor """
+    """__init__ is the initializer for the class. It gets passed whatever the \
+    primary constructor was called """
     def __init__(self, id, first_name, date_of_birth, genre, eyes_color):
         if type(id) is not int or id < 0:
             raise Exception("id is not an integer")
@@ -31,9 +33,7 @@ class Person():
         if type(genre) is not str and not genre in Person.GENRES:
             raise Exception("genre is not valid")
         if type(eyes_color) is not str and not eyes_color in Person.EYES_COLOR:
-            raise Exception("eyes_color is not valid")
-
-               
+            raise Exception("eyes_color is not valid")              
         #private attributes
         self.__id = id
         self.__first_name = first_name
@@ -42,10 +42,6 @@ class Person():
         self.__eyes_color = eyes_color
         #public attribute
         self.last_name = ("")
-        
-    ''' Destructor '''
-    def __del__(self):
-        pass    
     
     ''' Getter - for retrieving the data '''
     def get_id(self):
@@ -79,7 +75,44 @@ class Person():
     def set_eyes_colors(self, eyes_colors):
         self.__eyes_color = eyes_colors
         
-    """ Public Method """
+    """ Public Methods """
+    
+    """ Base Class Descriptions """   
+    def __str__(self):
+        return self.__first_name + " " + self.last_name
+
+    def is_male(self):
+        if self.__genre == "Male":
+            return True
+        else:
+            pass
+        
+    def age(self):
+        if self.__date_of_birth[0] > 5 and self.__date_of_birth[1] > 20:
+            return (2015 - self.__date_of_birth[2])
+        else:
+            return (2016 - self.__date_of_birth[2])    
+       
+    """ Comparison Magic Methods """
+    #Defines behavior for the equality operator, ==.            
+    def __eq__(self, other):
+        return self.age() == other.age()
+     #Defines behavior for the inequality operator, !=.       
+    def __ne__(self, other):
+        return self.age() != other.age()
+    #Defines behavior for the less-than operator, <.  
+    def __lt__(self, other):
+        return self.age() < other.age()
+    #Defines behavior for the greater-than operator, >.
+    def __gt__(self, other):
+        return self.age() > other.age()
+    #Defines behavior for the less-than-or-equal-to operator, <=.    
+    def __le__(self, other):
+        return self.age() <= other.age()
+    #Defines behavior for the greater-than-or-equal-to operator, >=.    
+    def __ge__(self, other):
+        return self.age() >= other.age()
+    
     
     
     
