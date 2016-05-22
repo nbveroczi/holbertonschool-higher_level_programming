@@ -8,9 +8,8 @@ This is script that describes a Person Class with attributes
 Return: a Person Class with EYES_COLORS and GENRES 
 """
 #!/usr/bin/python
-#import json
-#import os.path
-
+import os.path
+import json
 """ Class """
 class Person():
     
@@ -21,7 +20,8 @@ class Person():
     """ Constructor """
     """__init__ is the initializer for the class. It gets passed whatever the \
     primary constructor was called """
-    def __init__(self, id, first_name, date_of_birth, genre, eyes_color):
+    def __init__(self, id, first_name, date_of_birth, genre, eyes_color, \
+                 is_married_to):
         if type(id) is not int or id < 0:
             raise Exception("id is not an integer")
         if type(first_name) is not str or len(first_name) == 0:
@@ -44,6 +44,7 @@ class Person():
         self.__eyes_color = eyes_color
         #public attribute
         self.last_name = ("")
+        self.is_married_to = is_married_to
     
     ''' Getter - for retrieving the data '''
     def get_id(self):
@@ -116,7 +117,10 @@ class Person():
         return self.age() >= other.age()
         
 """ Additional Class Descriptions """
+
+""" A Baby Class """
 class Baby(Person):
+    #public methods
     def can_run(self):
         return False
     def need_help(self):
@@ -125,8 +129,10 @@ class Baby(Person):
         return True
     def can_vote(self):
         return False
-
+        
+""" A Teenager Class """
 class Teenager(Person):
+    #public methods
     def can_run(self):
         return True
     def need_help(self):
@@ -135,8 +141,10 @@ class Teenager(Person):
         return True
     def can_vote(self):
         return False
-
+        
+""" An Adult Class """
 class Adult(Person):
+    #public methods
     def can_run(self):
         return True
     def need_help(self):
@@ -145,7 +153,9 @@ class Adult(Person):
         return False
     def can_vote(self):
         return True
-            
+        
+""" A Senior Class """
+    #public methods        
 class Senior(Person):
     def can_run(self):
         return False
@@ -156,9 +166,40 @@ class Senior(Person):
     def can_vote(self):
         return True
     
-    
-    
+    """ Json Methods """
+    def json(self):
+        dict = {
+            'id': self.__id(),
+            'eyes_color': self.__eyes_color(),
+            'genre': self.__genre,
+            'date_of_birth': self.__date_of_birth(),
+            'first_name': self.__first_name(),
+            'last_name': self.last_name,
+            'is_married_to': self.is_married_to,
+            }
+        return dict
         
-        
+    def load_from_json(self, json):
+        if type(json) is not dict:
+            raise Exception("json is not valid")
+        self.__id = json['id']
+        self.__eyes_color = json['eye_color']
+        self.__genre = json['genre']
+        self.__date_of_birth = json['date_of_birth']
+        self.__first_name = json['first_name']
+        self.last_name = json['last_name']
+        self.is_married_to = json['is_married_to']
+ 
+    def save_to_file(list, filename):
+        with open(filename, 'w') as outfile:
+            outfile = json.dump(list, outfile)
+
+    def load_from_file(filename):
+        if type(filename) is not str or os.path.exists(filename) == False:
+            raise Exception("filename is not valid or doesn't exit")
+        with open(filename, 'r') as json_data:
+            data = json.load(json_data)
+            return data
+
 
 
