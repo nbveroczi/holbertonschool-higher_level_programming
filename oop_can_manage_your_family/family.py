@@ -18,6 +18,22 @@ class Person():
     
     """ Constructor """
     def __init__(self, id, first_name, date_of_birth, genre, eyes_color):
+        if type(id) is not int or id < 0:
+            raise Exception("id is not an integer")
+        if type(first_name) is not str or len(first_name) == 0:
+            raise Exception("first_name is not a string")
+        if type(date_of_birth) is not list or len(date_of_birth) != 3:
+            raise Exception("date_of_birth is not a valid date") 
+        if date_of_birth[0] < 1 or date_of_birth[0] > 12:
+            raise Exception("date_of_birth is not a valid date")  
+        if date_of_birth[1] < 1 or date_of_birth[1] > 31:
+            raise Exception("date_of_birth is not a valid date")  
+        if type(genre) is not str and not genre in Person.GENRES:
+            raise Exception("genre is not valid")
+        if type(eyes_color) is not str and not eyes_color in Person.EYES_COLOR:
+            raise Exception("eyes_color is not valid")
+
+               
         #private attributes
         self.__id = id
         self.__first_name = first_name
