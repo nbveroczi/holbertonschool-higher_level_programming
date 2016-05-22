@@ -48,6 +48,24 @@ class Person():
         return self.__eyes_color
         
     """ Setter - for changing the data """
+    def set_id(self, id):
+        self.__id = id
+        
+    def set_first_name(self, first_name):
+        self.__first_name = first_name
+        
+    def set_date_of_birth(self, date_of_birth):
+        self.__date_of_birth = date_of_birth
+        
+    def set_genre(self, genre):
+        self.__genre = genre
+        
+    def set_eyes_colors(self, eyes_colors):
+        self.__eyes_color = eyes_colors
+        
+    """ Public Method """
+    
+    
     
         
         
