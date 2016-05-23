@@ -22,6 +22,7 @@ class Person():
     primary constructor was called """
     def __init__(self, id, first_name, date_of_birth, genre, eyes_color, \
                  is_married_to):
+
         if type(id) is not int or id < 0:
             raise Exception("id is not an integer")
         if type(first_name) is not str or len(first_name) == 0:
@@ -129,7 +130,24 @@ class Baby(Person):
         return True
     def can_vote(self):
         return False
-        
+    def can_be_married(self):
+        return False
+    def is_married(self):
+        if self.is_married_to != 0:
+            return True 
+    def divorce(self, p):
+        self.is_married_to = 0
+        p.is_married_to = 0   
+    def just_married_with(self, p):
+        self.is_married_to = p.__id
+        p.is_married_to = self.__id
+        if p.is_male() == False:
+            self.last_name = p.last_name
+        if self.is_married() == True or p.is_married() == True:
+            raise Exception("Already married")
+        if self.can_be_married() == False or p.can_be_married() == False:
+            raise Exception("Can't be married")
+
 """ A Teenager Class """
 class Teenager(Person):
     #public methods
@@ -139,8 +157,25 @@ class Teenager(Person):
         return False
     def is_young(self):
         return True
-    def can_vote(self):
+    def can_vote(self):      
         return False
+    def can_be_married(self):
+        return False        
+    def is_married(self):
+        if self.is_married_to != 0:
+            return True    
+    def divorce(self, p):
+        self.is_married_to = 0
+        p.is_married_to = 0       
+    def just_married_with(self, p):
+        self.is_married_to = p.__id
+        p.is_married_to = self.__id
+        if p.is_male() == False:
+            self.last_name = p.last_name
+        if self.is_married() == True or p.is_married() == True:
+            raise Exception("Already married")
+        if self.can_be_married() == False or p.can_be_married() == False:
+            raise Exception("Can't be married")        
         
 """ An Adult Class """
 class Adult(Person):
@@ -151,8 +186,25 @@ class Adult(Person):
         return False
     def is_young(self):
         return False
-    def can_vote(self):
+    def can_vote(self):         
         return True
+    def can_be_married(self):
+        return True         
+    def is_married(self):
+        if self.is_married_to != 0:
+            return True   
+    def divorce(self, p):
+        self.is_married_to = 0
+        p.is_married_to = 0     
+    def just_married_with(self, p):
+        self.is_married_to = p.__id
+        p.is_married_to = self.__id
+        if p.is_male() == False:
+            self.last_name = p.last_name
+        if self.is_married() == True or p.is_married() == True:
+            raise Exception("Already married")
+        if self.can_be_married() == False or p.can_be_married() == False:
+            raise Exception("Can't be married")        
         
 """ A Senior Class """
     #public methods        
@@ -165,6 +217,23 @@ class Senior(Person):
         return False
     def can_vote(self):
         return True
+    def can_be_married(self):
+        return True          
+    def is_married(self):
+        if self.is_married_to != 0:
+            return True  
+    def divorce(self, p):
+        self.is_married_to = 0
+        p.is_married_to = 0 
+    def just_married_with(self, p):
+        self.is_married_to = p.__id
+        p.is_married_to = self.__id
+        if p.is_male() == False:
+            self.last_name = p.last_name
+        if self.is_married() == True or p.is_married() == True:
+            raise Exception("Already married")
+        if self.can_be_married() == False or p.can_be_married() == False:
+            raise Exception("Can't be married")         
     
     """ Json Methods """
     def json(self):
@@ -189,10 +258,12 @@ class Senior(Person):
         self.__first_name = json['first_name']
         self.last_name = json['last_name']
         self.is_married_to = json['is_married_to']
- 
+
     def save_to_file(list, filename):
+        if type(filename) is not str or os.path.exists(filename) == False:
+            raise Exception("filename is not valid or doesn't exit")
         with open(filename, 'w') as outfile:
-            outfile = json.dump(list, outfile)
+            json.dump(list, outfile)
 
     def load_from_file(filename):
         if type(filename) is not str or os.path.exists(filename) == False:
@@ -200,6 +271,7 @@ class Senior(Person):
         with open(filename, 'r') as json_data:
             data = json.load(json_data)
             return data
+     
 
 
 
