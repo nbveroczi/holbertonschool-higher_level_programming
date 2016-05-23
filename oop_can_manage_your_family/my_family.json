@@ -1,1 +1,9 @@
-[{…}, {…}, {…}]
+{
+  "id": 0,
+  "eyes_color": "Blue",
+  "genre": "Female",
+  "date_of_birth": [11,5,1982],
+  "first_name": "Tina",
+  "last_name": "Bazinski", 
+  "is_married_to": "Vasil"
+}
