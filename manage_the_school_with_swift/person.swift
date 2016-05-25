@@ -4,7 +4,7 @@ class Person {
     var first_name: String
     var last_name: String
     var age: Int
-    
+
     // Constructor
     init(first_name: String, last_name: String, age: Int) {
         self.first_name = first_name
@@ -41,7 +41,7 @@ class Mentor: Person, Classify {
         return false
     }
     var subject: Subject
-    
+
     // Constructor with subject
     init(first_name: String, last_name: String, age: Int, subject:
         Subject = Subject.Math) {
@@ -69,7 +69,7 @@ class Mentor: Person, Classify {
 class Student: Person, Classify {
     override func className () -> String {
         return "Student"
-    }    
+    }
     func isStudent() -> Bool {
         return true
     }
