@@ -10,6 +10,7 @@ Return: the value of title attribute
 #!/usr/bin/python
 import Tkinter as tk
 
+
 """ Class """
 class TaskView(tk.Toplevel):
     
@@ -24,7 +25,7 @@ class TaskView(tk.Toplevel):
         
         #private attributes - Title lable
         self.__title_var = tk.StringVar()
-        self.__title_lable = tk.Label(textvariable=self.__title_var)
+        self.__title_lable = tk.Label(self, textvariable=self.__title_var)
         self.__title_lable.pack(side='right')
         #public attributes - Toggle button
         self.toggle_button = tk.Button(self, text="Reverse")
